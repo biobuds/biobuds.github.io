@@ -36,12 +36,12 @@
 
         h1, h3, p {
             color: inherit;
-            text-shadow: 0 0 10px #fff, 0 0 20px #fff;
+            text-shadow: 0 0 8px #fff;
             margin-bottom: 20px;
             transition: color 0.5s ease;
         }
 
-        .button, .socials a {
+        .button {
             text-decoration: none;
             color: #fff;
             padding: 12px 25px;
@@ -57,9 +57,70 @@
             transition: transform 0.3s ease, background-color 0.3s ease;
         }
 
-        .button:hover, .socials a:hover {
+        .button:hover {
             transform: scale(1.1);
             background-color: rgba(85, 85, 85, 0.8); /* Efecto hover */
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .instagram-button {
+            position: relative;
+            display: inline-block;
+            background-color: #333;
+            border-radius: 25px;
+            padding: 12px 25px;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            margin: 10px;
+        }
+
+        .instagram-button:hover {
+            background-color: #555;
+            box-shadow: 0 0 10px #fff, 0 0 20px #fff; /* Ilumina el botón */
+        }
+
+        .instagram-options {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #fff;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .instagram-options a {
+            display: block;
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+        .instagram-options a:hover {
+            background-color: #555;
+        }
+
+        .instagram-button:hover .instagram-options {
+            display: block;
+            opacity: 1;
+            transform: translateY(5px);
         }
 
         .schedule-modal {
@@ -125,6 +186,7 @@
         <h1>Detalles de Pago y Contacto</h1>
         <div class="details">
             <h3>Datos de Transferencia Bancaria:</h3>
+            <p><strong>Nombre:</strong> Claudio Arias</p>
             <p><strong>Banco:</strong> Scotiabank</p>
             <p><strong>Cuenta Corriente:</strong> 1276772503</p>
             <p><strong>RUT:</strong> 12006081-3</p>
@@ -133,9 +195,15 @@
             <div id="copyNotification">Los datos han sido copiados</div>
         </div>
         <div class="socials">
-            <h3>Síguenos y Contáctanos:</h3>
-            <a href="https://www.instagram.com/seedhartavinadelmar/" target="_blank" class="instagram external" rel="noopener">Instagram</a>
-            <a href="https://api.whatsapp.com/send?phone=56993198230&amp;text=Hola,%20quiero%20más%20información%20sobre%20sus%20productos." target="_blank" class="whatsapp external" rel="noopener">WhatsApp</a>
+            <div class="instagram-button">
+                Instagram
+                <div class="instagram-options">
+                    <a href="https://www.instagram.com/seedhartavinadelmar/" target="_blank" rel="noopener">@seedhartavinadelmar</a>
+                    <a href="https://www.instagram.com/seedharta/" target="_blank" rel="noopener">@seedharta</a>
+                    <a href="https://www.instagram.com/seedhartagrow/" target="_blank" rel="noopener">@seedhartagrow</a>
+                </div>
+            </div>
+            <a href="https://api.whatsapp.com/send?phone=56993198230&amp;text=Hola,%20quiero%20más%20información%20sobre%20sus%20productos." target="_blank" class="button whatsapp" rel="noopener">WhatsApp</a>
             <button class="button" onclick="showSchedule()">Ver Horarios</button>
         </div>
     </div>
