@@ -105,22 +105,6 @@
             background-color: rgba(85, 85, 85, 0.8);
         }
 
-        #copyNotification {
-            display: none;
-            position: fixed;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 0.9em;
-            z-index: 3;
-            text-shadow: none;
-            box-shadow: 0 0 10px #fff, 0 0 20px #fff;
-        }
-
         .instagram-button {
             position: relative;
             display: inline-block;
@@ -151,7 +135,9 @@
             border-radius: 10px;
             box-shadow: 0 0 10px #fff;
             z-index: 2;
+            opacity: 0;
             transition: opacity 0.3s ease, transform 0.3s ease;
+            margin-top: 10px;
         }
 
         .instagram-options a {
@@ -161,6 +147,7 @@
             text-decoration: none;
             font-weight: bold;
             text-transform: uppercase;
+            transition: background-color 0.3s ease;
         }
 
         .instagram-options a:hover {
@@ -168,7 +155,7 @@
         }
 
         .instagram-button:hover .instagram-options,
-        .instagram-button:active .instagram-options {
+        .instagram-button:focus .instagram-options {
             display: block;
             opacity: 1;
             transform: translateY(0);
@@ -189,6 +176,19 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
+        }
+
+        #copyNotification {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
@@ -227,9 +227,9 @@
     </div>
     <script>
         const gifs = [
-            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWVhNzZpYXJ4cmE2YWhocmhqdHF5dmxhcG44enJlZ2ttbzc1c3JwZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0COGs72qnjeCJ4He/giphy.gif",
-            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWN5bXNhbWE0eWxieGYyajNoa3V1bzJkN21vZDN2M3FydW9jbWIyaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/At74Q5tdZAXzCKyT2C/giphy.gif",
-            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExd0x6cG80ZzN0QWg5MmNkMVRQY2dBNjFIZ29jY19kN3p3b2FxZ2ZpZFRBMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gIfq2R4gKzVdBL71vR/giphy.gif"
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWVhNzZpYXJ4cmE2YWhocmhqdHF5dmxhcG88enJlZ2ttbzc1c3JwZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0COGs72qnjeCJ4He/giphy.gif",
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWN5bXNhbWE0eWxieGYyajNoa3V1bzJkN21vZDN2M3FydW9jbWIyaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qmKB6P7Ub4OLu/giphy.gif",
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2x5d3JmMnhwYW5oaG42cGZ2dTgxbGVwY3BhY2x1a2JjMGUzYzFzbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZpZFRBMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gIfq2R4gKzVdBL71vR/giphy.gif"
         ];
 
         let currentGif = 0;
@@ -245,10 +245,13 @@
         function copyToClipboard() {
             const textToCopy = "Nombre: Claudio Arias\nBanco: Scotiabank\nCuenta Corriente: 1276772503\nRUT: 12006081-3\nCorreo: tiendavalpo07@gmail.com";
             navigator.clipboard.writeText(textToCopy).then(() => {
-                document.getElementById('copyNotification').style.display = 'block';
+                const notification = document.getElementById('copyNotification');
+                notification.style.display = 'block';
                 setTimeout(() => {
-                    document.getElementById('copyNotification').style.display = 'none';
+                    notification.style.display = 'none';
                 }, 3000);
+            }).catch(err => {
+                console.error('Error al copiar al portapapeles:', err);
             });
         }
 
