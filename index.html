@@ -28,30 +28,15 @@
             cursor: pointer;
         }
 
-        .scroll-container {
-            height: 100vh;
-            overflow-y: auto;
-            scroll-snap-type: y mandatory;
-        }
-
-        .scroll-section {
-            height: 100vh;
-            scroll-snap-align: start;
-            position: relative;
-            background-color: rgba(0, 0, 0, 0.6); /* Caja opaca para el fondo GIF */
-        }
-
         .container {
             position: relative;
             z-index: 2;
             padding: 20px;
-            max-width: 800px;
-            margin: auto;
         }
 
         h1, h3, p {
             color: inherit;
-            text-shadow: 0 0 8px #fff;
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff;
             margin-bottom: 20px;
             transition: color 0.5s ease;
         }
@@ -132,148 +117,79 @@
             text-shadow: none;
             box-shadow: 0 0 10px #fff, 0 0 20px #fff;
         }
-
-        .instagram-button {
-            position: relative;
-            display: inline-block;
-            background-color: #333;
-            border-radius: 25px;
-            padding: 12px 25px;
-            color: #fff;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            overflow: hidden;
-            transition: background-color 0.3s ease;
-        }
-
-        .instagram-button:hover {
-            background-color: #555;
-        }
-
-        .instagram-options {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #333;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #fff;
-            z-index: 2;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .instagram-options a {
-            display: block;
-            padding: 10px 20px;
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .instagram-options a:hover {
-            background-color: #555;
-        }
-
-        .instagram-button:hover .instagram-options,
-        .instagram-button:active .instagram-options {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .scroll-indicator {
-            position: fixed;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(255, 255, 255, 0.5);
-            color: #000;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .scroll-indicator:hover {
-            background-color: rgba(255, 255, 255, 0.8);
-        }
     </style>
 </head>
 <body>
     <div class="gif-container" id="gifContainer"></div>
-    <div class="scroll-container">
-        <div class="scroll-section">
-            <div class="container">
-                <h1>Detalles de Pago y Contacto</h1>
-                <div class="details">
-                    <h3>Datos de Transferencia Bancaria:</h3>
-                    <p><strong>Nombre:</strong> Claudio Arias</p>
-                    <p><strong>Banco:</strong> Scotiabank</p>
-                    <p><strong>Cuenta Corriente:</strong> 1276772503</p>
-                    <p><strong>RUT:</strong> 12006081-3</p>
-                    <p><strong>Correo:</strong> tiendavalpo07@gmail.com</p>
-                    <button class="button" onclick="copyToClipboard()">Copiar datos de transferencia</button>
-                    <div id="copyNotification">Los datos han sido copiados</div>
-                </div>
-                <div class="socials">
-                    <h3>Síguenos y Contáctanos:</h3>
-                    <div class="instagram-button">
-                        Instagram
-                        <div class="instagram-options">
-                            <a href="https://www.instagram.com/seedhartavinadelmar/" target="_blank" rel="noopener">@seedhartavinadelmar</a>
-                            <a href="https://www.instagram.com/seedharta/" target="_blank" rel="noopener">@seedharta</a>
-                            <a href="https://www.instagram.com/seedhartagrow/" target="_blank" rel="noopener">@seedhartagrow</a>
-                        </div>
-                    </div>
-                    <a href="https://api.whatsapp.com/send?phone=56993198230&amp;text=Hola,%20quiero%20más%20información%20sobre%20sus%20productos." target="_blank" class="button whatsapp" rel="noopener">WhatsApp</a>
-                    <button class="button" onclick="showSchedule()">Ver Horarios</button>
-                </div>
-            </div>
+    <div class="container">
+        <h1>Detalles de Pago y Contacto</h1>
+        <div class="details">
+            <h3>Datos de Transferencia Bancaria:</h3>
+            <p><strong>Banco:</strong> Scotiabank</p>
+            <p><strong>Cuenta Corriente:</strong> 1276772503</p>
+            <p><strong>RUT:</strong> 12006081-3</p>
+            <p><strong>Correo:</strong> tiendavalpo07@gmail.com</p>
+            <button class="button" onclick="copyToClipboard()">Copiar datos de transferencia</button>
+            <div id="copyNotification">Los datos han sido copiados</div>
         </div>
-        <div class="scroll-section">
-            <div id="dino-game" class="container">
-                <h2>¡Juego del Dinosaurio!</h2>
-                <iframe src="https://www.google.com/doodles/about" style="width:100%; height:80vh; border:none;"></iframe>
-            </div>
+        <div class="socials">
+            <h3>Síguenos y Contáctanos:</h3>
+            <a href="https://www.instagram.com/seedhartavinadelmar/" target="_blank" class="instagram external" rel="noopener">Instagram</a>
+            <a href="https://api.whatsapp.com/send?phone=56993198230&amp;text=Hola,%20quiero%20más%20información%20sobre%20sus%20productos." target="_blank" class="whatsapp external" rel="noopener">WhatsApp</a>
+            <button class="button" onclick="showSchedule()">Ver Horarios</button>
         </div>
     </div>
     <div id="scheduleModal" class="schedule-modal">
-        <h2>Horarios de Atención</h2>
-        <p>Lunes a Viernes: 10:00 - 18:00</p>
-        <p>Sábado: 10:00 - 14:00</p>
-        <button class="close-btn" onclick="closeSchedule()">Cerrar</button>
+        <h3>Horarios de Atención:</h3>
+        <p>Lunes a Viernes: 10:30 - 19:00 hrs</p>
+        <p>Sábado: 12:00 - 16:00 hrs</p>
+        <button class="button close-btn" onclick="closeSchedule()">Volver</button>
     </div>
-    <div class="scroll-indicator" onclick="scrollDown()">↓</div>
-
     <script>
+        const gifs = [
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWVhNzZpYXJ4cmE2YWhocmhqdHF5dmxhcG44enJlZ2ttbzc1c3JwZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0COGs72qnjeCJ4He/giphy.gif",
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWN5bXNhbWE0eWxieGYyajNoa3V1bzJkN21vZDN2M3FydW9jbWIyaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/At74Q5tdZAXxMwv8r8/giphy.gif",
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHlqMXMzMHA2NW5xaHZoMGg1MXZkb25sdDhvbnNxYnN2Mnp5Mm90MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Jnx5ztK49mHJe/giphy.gif",
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGx6dms4M2Exb3N1YmE0d2c0bjl5ams5cGJubXZhMXdrejRuNW9lNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fBjNVnqhEagMg/giphy.gif",
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHJ1cHlmeTNiMjhwNnNvaHdhaWJtZzZwM2NjOWFmYnU0d3k5NTV3YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/7q9TwhbiPhphcEQKLS/giphy.gif"
+        ];
+        let currentIndex = 0;
+
+        function changeGIF() {
+            const gifContainer = document.getElementById('gifContainer');
+            gifContainer.style.backgroundImage = `url(${gifs[currentIndex]})`;
+            currentIndex = (currentIndex + 1) % gifs.length;
+        }
+
         function copyToClipboard() {
-            const copyText = "Nombre: Claudio Arias\nBanco: Scotiabank\nCuenta Corriente: 1276772503\nRUT: 12006081-3\nCorreo: tiendavalpo07@gmail.com";
-            navigator.clipboard.writeText(copyText).then(() => {
-                document.getElementById("copyNotification").style.display = "block";
-                setTimeout(() => document.getElementById("copyNotification").style.display = "none", 2000);
+            const text = "Banco: Scotiabank\nCuenta Corriente: 1276772503\nRUT: 12006081-3\nCorreo: tiendavalpo07@gmail.com";
+            navigator.clipboard.writeText(text).then(() => {
+                const notification = document.getElementById('copyNotification');
+                notification.style.display = 'block';
+                setTimeout(() => notification.style.display = 'none', 2000);
             });
         }
 
         function showSchedule() {
-            document.getElementById("scheduleModal").classList.add("show");
+            document.getElementById('scheduleModal').classList.add('show');
+            document.getElementById('scheduleModal').classList.remove('hide');
         }
 
         function closeSchedule() {
-            document.getElementById("scheduleModal").classList.remove("show");
+            document.getElementById('scheduleModal').classList.add('hide');
+            document.getElementById('scheduleModal').classList.remove('show');
         }
 
-        function scrollDown() {
-            window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const gifContainer = document.getElementById('gifContainer');
+            gifContainer.addEventListener('click', (event) => {
+                if (!event.target.closest('.button')) {
+                    changeGIF();
+                }
+            });
+
+            setInterval(changeGIF, 10000); // Cambia el GIF cada 10 segundos
+        });
     </script>
 </body>
 </html>
