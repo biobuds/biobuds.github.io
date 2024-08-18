@@ -32,6 +32,9 @@
             position: relative;
             z-index: 2;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         h1, h3, p {
@@ -41,7 +44,7 @@
             transition: color 0.5s ease;
         }
 
-        .button {
+        .button, .socials a {
             text-decoration: none;
             color: #fff;
             padding: 12px 25px;
@@ -57,70 +60,9 @@
             transition: transform 0.3s ease, background-color 0.3s ease;
         }
 
-        .button:hover {
+        .button:hover, .socials a:hover {
             transform: scale(1.1);
             background-color: rgba(85, 85, 85, 0.8); /* Efecto hover */
-        }
-
-        .socials {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .instagram-button {
-            position: relative;
-            display: inline-block;
-            background-color: #333;
-            border-radius: 25px;
-            padding: 12px 25px;
-            color: #fff;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            overflow: hidden;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            margin: 10px;
-        }
-
-        .instagram-button:hover {
-            background-color: #555;
-            box-shadow: 0 0 10px #fff, 0 0 20px #fff; /* Ilumina el botón */
-        }
-
-        .instagram-options {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #333;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #fff;
-            z-index: 2;
-            opacity: 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .instagram-options a {
-            display: block;
-            padding: 10px 20px;
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: background-color 0.3s ease;
-        }
-
-        .instagram-options a:hover {
-            background-color: #555;
-        }
-
-        .instagram-button:hover .instagram-options {
-            display: block;
-            opacity: 1;
-            transform: translateY(5px);
         }
 
         .schedule-modal {
@@ -178,6 +120,76 @@
             text-shadow: none;
             box-shadow: 0 0 10px #fff, 0 0 20px #fff;
         }
+
+        .instagram-button {
+            position: relative;
+            display: inline-block;
+            background-color: #333;
+            border-radius: 25px;
+            padding: 12px 25px;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: background-color 0.3s ease;
+            margin: 10px;
+        }
+
+        .instagram-button:hover {
+            background-color: #555;
+        }
+
+        .instagram-options {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #fff;
+            z-index: 2;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .instagram-options a {
+            display: block;
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .instagram-options a:hover {
+            background-color: #555;
+        }
+
+        .instagram-button:hover .instagram-options,
+        .instagram-button:active .instagram-options {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .instagram-options a {
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .instagram-button:hover .instagram-options a {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
     </style>
 </head>
 <body>
@@ -194,7 +206,7 @@
             <button class="button" onclick="copyToClipboard()">Copiar datos de transferencia</button>
             <div id="copyNotification">Los datos han sido copiados</div>
         </div>
-        <div class="socials">
+        <div class="button-container">
             <div class="instagram-button">
                 Instagram
                 <div class="instagram-options">
@@ -216,48 +228,37 @@
     <script>
         const gifs = [
             "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWVhNzZpYXJ4cmE2YWhocmhqdHF5dmxhcG44enJlZ2ttbzc1c3JwZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0COGs72qnjeCJ4He/giphy.gif",
-            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWN5bXNhbWE0eWxieGYyajNoa3V1bzJkN21vZDN2M3FydW9jbWIyaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/At74Q5tdZAXxMwv8r8/giphy.gif",
-            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHlqMXMzMHA2NW5xaHZoMGg1MXZkb25sdDhvbnNxYnN2Mnp5Mm90MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Jnx5ztK49mHJe/giphy.gif",
-            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGx6dms4M2Exb3N1YmE0d2c0bjl5ams5cGJubXZhMXdrejRuNW9lNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fBjNVnqhEagMg/giphy.gif",
-            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHJ1cHlmeTNiMjhwNnNvaHdhaWJtZzZwM2NjOWFmYnU0d3k5NTV3YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/7q9TwhbiPhphcEQKLS/giphy.gif"
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWN5bXNhbWE0eWxieGYyajNoa3V1bzJkN21vZDN2M3FydW9jbWIyaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/At74Q5tdZAXzCKyT2C/giphy.gif",
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExd0x6cG80ZzN0QWg5MmNkMVRQY2dBNjFIZ29jY19kN3p3b2FxZ2ZpZFRBMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gIfq2R4gKzVdBL71vR/giphy.gif"
         ];
-        let currentIndex = 0;
 
-        function changeGIF() {
-            const gifContainer = document.getElementById('gifContainer');
-            gifContainer.style.backgroundImage = `url(${gifs[currentIndex]})`;
-            currentIndex = (currentIndex + 1) % gifs.length;
+        let currentGif = 0;
+        const gifContainer = document.getElementById('gifContainer');
+
+        function changeGif() {
+            gifContainer.style.backgroundImage = `url(${gifs[currentGif]})`;
+            currentGif = (currentGif + 1) % gifs.length;
         }
 
+        setInterval(changeGif, 10000);
+
         function copyToClipboard() {
-            const text = "Banco: Scotiabank\nCuenta Corriente: 1276772503\nRUT: 12006081-3\nCorreo: tiendavalpo07@gmail.com";
-            navigator.clipboard.writeText(text).then(() => {
-                const notification = document.getElementById('copyNotification');
-                notification.style.display = 'block';
-                setTimeout(() => notification.style.display = 'none', 2000);
+            const textToCopy = "Nombre: Claudio Arias\nBanco: Scotiabank\nCuenta Corriente: 1276772503\nRUT: 12006081-3\nCorreo: tiendavalpo07@gmail.com";
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                document.getElementById('copyNotification').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('copyNotification').style.display = 'none';
+                }, 3000);
             });
         }
 
         function showSchedule() {
             document.getElementById('scheduleModal').classList.add('show');
-            document.getElementById('scheduleModal').classList.remove('hide');
         }
 
         function closeSchedule() {
-            document.getElementById('scheduleModal').classList.add('hide');
             document.getElementById('scheduleModal').classList.remove('show');
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const gifContainer = document.getElementById('gifContainer');
-            gifContainer.addEventListener('click', (event) => {
-                if (!event.target.closest('.button')) {
-                    changeGIF();
-                }
-            });
-
-            setInterval(changeGIF, 10000); // Cambia el GIF cada 10 segundos
-        });
     </script>
 </body>
 </html>
