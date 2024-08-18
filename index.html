@@ -51,15 +51,15 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
-            background-color: #333;
-            border: 2px solid #fff;
+            background-color: rgba(51, 51, 51, 0.8); /* Botones traslúcidos */
+            border: 2px solid rgba(255, 255, 255, 0.8); /* Borde traslúcido */
             box-shadow: 0 0 10px #fff, 0 0 20px #fff;
             transition: transform 0.3s ease, background-color 0.3s ease;
         }
 
         .button:hover, .socials a:hover {
             transform: scale(1.1);
-            background-color: #555;
+            background-color: rgba(85, 85, 85, 0.8); /* Efecto hover */
         }
 
         .schedule-modal {
@@ -92,14 +92,14 @@
 
         .close-btn {
             margin-top: 15px;
-            background-color: #333;
+            background-color: rgba(51, 51, 51, 0.8); /* Botón traslúcido */
             color: #fff;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         .close-btn:hover {
-            background-color: #555;
+            background-color: rgba(85, 85, 85, 0.8);
         }
 
         #copyNotification {
@@ -135,7 +135,7 @@
         <div class="socials">
             <h3>Síguenos y Contáctanos:</h3>
             <a href="https://www.instagram.com/seedhartavinadelmar/" target="_blank" class="instagram external" rel="noopener">Instagram</a>
-            <a href="https://api.whatsapp.com/send?phone=56993198230&amp;text=Hola,%20quiero%20más%20información%20sobre%20sus%20productos%20y%20obtener%20un%205%%20de%20descuento." target="_blank" class="whatsapp external" rel="noopener">WhatsApp</a>
+            <a href="https://api.whatsapp.com/send?phone=56993198230&amp;text=Hola,%20quiero%20más%20información%20sobre%20sus%20productos." target="_blank" class="whatsapp external" rel="noopener">WhatsApp</a>
             <button class="button" onclick="showSchedule()">Ver Horarios</button>
         </div>
     </div>
@@ -145,17 +145,13 @@
         <p>Sábado: 12:00 - 16:00 hrs</p>
         <button class="button close-btn" onclick="closeSchedule()">Volver</button>
     </div>
-    <p>
     <script>
         const gifs = [
             "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWVhNzZpYXJ4cmE2YWhocmhqdHF5dmxhcG44enJlZ2ttbzc1c3JwZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0COGs72qnjeCJ4He/giphy.gif",
             "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWN5bXNhbWE0eWxieGYyajNoa3V1bzJkN21vZDN2M3FydW9jbWIyaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/At74Q5tdZAXxMwv8r8/giphy.gif",
             "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHlqMXMzMHA2NW5xaHZoMGg1MXZkb25sdDhvbnNxYnN2Mnp5Mm90MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Jnx5ztK49mHJe/giphy.gif",
             "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGx6dms4M2Exb3N1YmE0d2c0bjl5ams5cGJubXZhMXdrejRuNW9lNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fBjNVnqhEagMg/giphy.gif",
-            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHJ1cHlmeTNiMjhwNnNvaHdhaWJtZzZwM2NjOWFmYnU0d3k5NTV3YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/7q9TwhbiPhphcEQKLS/giphy.gif",
-            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ozZXN5bm93OTIxZzR5Z3N5ZWlzd2Y1Nm9xcnp6YnB6dWw5dmtteiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4a1BW6oEvxPhK/giphy.gif",
-            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTdweXJ0dmY0anRkN2U5b2IydDNsa3h4azkwZXAzdmNzcWJjeXN2YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/yogEmgIWxh72w/giphy.gif",
-            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdG5rZTRkNXRrMjVrZXE3ZXNoZWp3cmlzZzU3ZzY2bzdjMnBvcmI3ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9zv3XzG1OTuHe/giphy.gif"
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHJ1cHlmeTNiMjhwNnNvaHdhaWJtZzZwM2NjOWFmYnU0d3k5NTV3YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/7q9TwhbiPhphcEQKLS/giphy.gif"
         ];
         let currentIndex = 0;
 
@@ -185,7 +181,14 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            setInterval(changeGIF, 10000); // Cambia el GIF cada 10 segundos
+            const gifContainer = document.getElementById('gifContainer');
+            gifContainer.addEventListener('click', (event) => {
+                if (!event.target.closest('.button')) {
+                    changeGIF();
+                }
+            });
+
+            setInterval(changeGIF, 1000); // Cambia el GIF cada 10 segundos
         });
     </script>
 </body>
