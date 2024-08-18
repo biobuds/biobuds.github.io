@@ -148,60 +148,45 @@
     <p>
     <script>
         const gifs = [
-            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHZlaXh2cGQ0YTRuaG85YzJ6cjA3ZWxoN3psaGowYmhtdmVuaWRkcSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/wwnnXHSZKHpjq/giphy.gif",
-            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHZlaXh2cGQ0YTRuaG85YzJ6cjA3ZWxoN3psaGowYmhtdmVuaWRkcSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/KpAPQVW9lWnWU/giphy.gif",
-            "https://media.giphy.com/media/Jnx5ztK49mHJe/giphy.gif?cid=790b76118veixvpd4a4nho9c2zr07elh7zlhj0bhmveniddq&ep=v1_gifs_search&rid=giphy.gif&ct=g",
-            "https://media.giphy.com/media/4a1BW6oEvxPhK/giphy.gif?cid=790b76118veixvpd4a4nho9c2zr07elh7zlhj0bhmveniddq&ep=v1_gifs_search&rid=giphy.gif&ct=g",
-            "https://media.giphy.com/media/MQg3rNARxgTuH2BvaW/giphy.gif?cid=ecf05e47xb6ut42h3hios1kj7qntxrrkxvhp0761kj3jhku8&ep=v1_gifs_search&rid=giphy.gif&ct=g",
-            "https://giphy.com/gifs/gifnews-fox-adhd-iBryhpz2IScw0",
-            "https://media.giphy.com/media/zq1xpuHusURD7Cd36b/giphy.gif?cid=790b76118veixvpd4a4nho9c2zr07elh7zlhj0bhmveniddq&ep=v1_gifs_search&rid=giphy.gif&ct=g",
-            "https://media.giphy.com/media/l0Iy7KAgU4dj9AF8s/giphy.gif?cid=ecf05e47xb6ut42h3hios1kj7qntxrrkxvhp0761kj3jhku8&ep=v1_gifs_search&rid=giphy.gif&ct=g",
-            "https://media.giphy.com/media/fUBGYADMJtX3tRciPW/giphy.gif?cid=ecf05e47xb6ut42h3hios1kj7qntxrrkxvhp0761kj3jhku8&ep=v1_gifs_search&rid=giphy.gif&ct=g",
-            "https://media.giphy.com/media/7qbvb3qdxpxkA/giphy.gif?cid=ecf05e47xb6ut42h3hios1kj7qntxrrkxvhp0761kj3jhku8&ep=v1_gifs_search&rid=giphy.gif&ct=g",
-            "https://media.giphy.com/media/4F2rXZyPtwkbK/giphy.gif?cid=790b7611b187d5f63b781bba87f1a37d7d7174055f41b2c4&ep=v1_gifs_search&rid=giphy.gif&ct=g"
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWVhNzZpYXJ4cmE2YWhocmhqdHF5dmxhcG44enJlZ2ttbzc1c3JwZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0COGs72qnjeCJ4He/giphy.gif",
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWN5bXNhbWE0eWxieGYyajNoa3V1bzJkN21vZDN2M3FydW9jbWIyaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/At74Q5tdZAXxMwv8r8/giphy.gif",
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHlqMXMzMHA2NW5xaHZoMGg1MXZkb25sdDhvbnNxYnN2Mnp5Mm90MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Jnx5ztK49mHJe/giphy.gif",
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGx6dms4M2Exb3N1YmE0d2c0bjl5ams5cGJubXZhMXdrejRuNW9lNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fBjNVnqhEagMg/giphy.gif",
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHJ1cHlmeTNiMjhwNnNvaHdhaWJtZzZwM2NjOWFmYnU0d3k5NTV3YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/7q9TwhbiPhphcEQKLS/giphy.gif",
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ozZXN5bm93OTIxZzR5Z3N5ZWlzd2Y1Nm9xcnp6YnB6dWw5dmtteiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4a1BW6oEvxPhK/giphy.gif",
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTdweXJ0dmY0anRkN2U5b2IydDNsa3h4azkwZXAzdmNzcWJjeXN2YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/yogEmgIWxh72w/giphy.gif",
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdG5rZTRkNXRrMjVrZXE3ZXNoZWp3cmlzZzU3ZzY2bzdjMnBvcmI3ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9zv3XzG1OTuHe/giphy.gif"
         ];
+        let currentIndex = 0;
 
-        let currentGifIndex = 0;
-        const gifContainer = document.getElementById('gifContainer');
-
-        function updateBackgroundImage() {
-            gifContainer.style.backgroundImage = `url(${gifs[currentGifIndex]})`;
-            adjustTextColor();
-        }
-
-        function nextGif() {
-            currentGifIndex = (currentGifIndex + 1) % gifs.length;
-            updateBackgroundImage();
-        }
-
-        function adjustTextColor() {
-            const textColor = getComputedStyle(document.body).color;
-            const isLightBackground = (textColor === 'rgb(255, 255, 255)');
-            document.body.style.color = isLightBackground ? '#000' : '#fff';
-        }
-
-        gifContainer.addEventListener('click', nextGif);
-
-        function showSchedule() {
-            document.getElementById('scheduleModal').classList.add('show');
-        }
-
-        function closeSchedule() {
-            document.getElementById('scheduleModal').classList.remove('show');
+        function changeGIF() {
+            const gifContainer = document.getElementById('gifContainer');
+            gifContainer.style.backgroundImage = `url(${gifs[currentIndex]})`;
+            currentIndex = (currentIndex + 1) % gifs.length;
         }
 
         function copyToClipboard() {
-            const textToCopy = "Banco: Scotiabank\nCuenta Corriente: 1276772503\nRUT: 12006081-3\nCorreo: tiendavalpo07@gmail.com";
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                document.getElementById('copyNotification').style.display = 'block';
-                setTimeout(() => {
-                    document.getElementById('copyNotification').style.display = 'none';
-                }, 2000);
+            const text = "Banco: Scotiabank\nCuenta Corriente: 1276772503\nRUT: 12006081-3\nCorreo: tiendavalpo07@gmail.com";
+            navigator.clipboard.writeText(text).then(() => {
+                const notification = document.getElementById('copyNotification');
+                notification.style.display = 'block';
+                setTimeout(() => notification.style.display = 'none', 2000);
             });
         }
 
-        updateBackgroundImage();
-        setInterval(nextGif, 15000);
+        function showSchedule() {
+            document.getElementById('scheduleModal').classList.add('show');
+            document.getElementById('scheduleModal').classList.remove('hide');
+        }
+
+        function closeSchedule() {
+            document.getElementById('scheduleModal').classList.add('hide');
+            document.getElementById('scheduleModal').classList.remove('show');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setInterval(changeGIF, 10000); // Cambia el GIF cada 10 segundos
+        });
     </script>
 </body>
 </html>
