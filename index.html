@@ -129,6 +129,7 @@
             <p><strong>Cuenta Corriente:</strong> 1276772503</p>
             <p><strong>RUT:</strong> 12006081-3</p>
             <p><strong>Correo:</strong> tiendavalpo07@gmail.com</p>
+            <p><strong>Nombre de contacto:</strong> Claudio Arias</p> <!-- Nombre agregado -->
             <button class="button" onclick="copyToClipboard()">Copiar datos de transferencia</button>
             <div id="copyNotification">Los datos han sido copiados</div>
         </div>
@@ -162,7 +163,7 @@
         }
 
         function copyToClipboard() {
-            const text = "Banco: Scotiabank\nCuenta Corriente: 1276772503\nRUT: 12006081-3\nCorreo: tiendavalpo07@gmail.com";
+            const text = "Banco: Scotiabank\nCuenta Corriente: 1276772503\nRUT: 12006081-3\nCorreo: tiendavalpo07@gmail.com\nNombre de contacto: Claudio Arias"; // Nombre agregado aquí
             navigator.clipboard.writeText(text).then(() => {
                 const notification = document.getElementById('copyNotification');
                 notification.style.display = 'block';
