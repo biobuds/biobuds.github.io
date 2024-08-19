@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,18 +32,9 @@
             background-position: center;
             background-repeat: no-repeat;
             transform: translate(-50%, -50%) rotateY(0deg);
-            animation: spin 20s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
-            perspective: 1000px;
-        }
-
-        @keyframes spin {
-            from {
-                transform: translate(-50%, -50%) rotateY(0deg);
-            }
-            to {
-                transform: translate(-50%, -50%) rotateY(360deg);
-            }
+            perspective: 1000px; /* Mejora la profundidad 3D */
+            transition: transform 0.3s ease; /* Suaviza el cambio de transform */
         }
 
         .container {
@@ -138,7 +128,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="logo-container" id="logo"></div>
     <div class="container">
@@ -169,35 +158,51 @@
 
     <script>
         const logo = document.getElementById('logo');
-        let isInteracting = false;
+        let rotationY = 0;
+        let velocityY = 0;
+        const friction = 0.95; // Ajusta la fricción para suavizar la desaceleración
+        const sensitivity = 1; // Ajusta la sensibilidad del movimiento del mouse
+        const spinSpeed = 0.1; // Velocidad de rotación constante cuando no hay interacción
 
         document.addEventListener('mousemove', (e) => {
-            if (isInteracting) {
-                const x = e.clientX / window.innerWidth - 0.5;
-                const y = e.clientY / window.innerHeight - 0.5;
-                logo.style.transform = `translate(-50%, -50%) rotateX(${y * 30}deg) rotateY(${x * 30}deg)`;
-            }
+            const x = (e.clientX / window.innerWidth - 0.5) * 2; // Ajusta la sensibilidad
+            velocityY = x * sensitivity;
         });
 
         document.addEventListener('mousedown', () => {
-            isInteracting = true;
-            logo.style.animation = 'none';
+            logo.style.animation = 'none'; // Detiene la animación al interactuar
         });
 
         document.addEventListener('mouseup', () => {
-            isInteracting = false;
-            logo.style.animation = 'spin 20s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55)';
+            logo.style.animation = 'spin 20s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55)'; // Reinicia la animación
         });
 
         logo.addEventListener('touchstart', () => {
-            isInteracting = true;
-            logo.style.animation = 'none';
+            logo.style.animation = 'none'; // Detiene la animación al interactuar en pantalla táctil
         });
 
         logo.addEventListener('touchend', () => {
-            isInteracting = false;
-            logo.style.animation = 'spin 20s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55)';
+            logo.style.animation = 'spin 20s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55)'; // Reinicia la animación
         });
+
+        function animate() {
+            // Aplica la rotación y fricción
+            rotationY += (velocityY || spinSpeed) * 10; // Asegura que siempre haya alguna rotación
+
+            velocityY *= friction;
+
+            // Detiene el movimiento si la velocidad es baja
+            if (Math.abs(velocityY) < 0.01) {
+                velocityY = 0;
+            }
+
+            // Actualiza el transform CSS con perspectiva 3D
+            logo.style.transform = `translate(-50%, -50%) rotateY(${rotationY}deg)`;
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
 
         function copyToClipboard() {
             const text = "Banco: Scotiabank\nCuenta Corriente: 1976772503\nRUT: 12006081-3\nCorreo: tiendavalpo07@gmail.com\nNombre de contacto: Claudio Arias";
@@ -217,5 +222,4 @@
         }
     </script>
 </body>
-
 </html>
