@@ -22,21 +22,27 @@
             width: 100%;
             height: 100%;
             position: absolute;
+            background-image: url('https://tenor.com/qYCis5RbuFU.gif');
             background-size: cover;
             background-position: center;
-            transition: background-image 1s ease-in-out;
-            cursor: pointer;
+            background-repeat: no-repeat;
+            z-index: -1;
         }
 
         .container {
             position: relative;
             z-index: 2;
             padding: 20px;
+            background: rgba(0, 0, 0, 0.5); /* Fondo translúcido para mejorar la legibilidad */
+            border-radius: 10px;
+            display: inline-block;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         h1, h3, p {
             color: inherit;
-            text-shadow: 0 0 10px #fff, 0 0 20px #fff;
+            text-shadow: 0 0 5px #fff;
             margin-bottom: 20px;
             transition: color 0.5s ease;
         }
@@ -44,22 +50,22 @@
         .button, .socials a {
             text-decoration: none;
             color: #fff;
-            padding: 12px 25px;
+            padding: 10px 20px;
             margin: 10px;
             display: inline-block;
-            border-radius: 25px;
+            border-radius: 20px;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            background-color: rgba(51, 51, 51, 0.8); /* Botones traslúcidos */
-            border: 2px solid rgba(255, 255, 255, 0.8); /* Borde traslúcido */
-            box-shadow: 0 0 10px #fff, 0 0 20px #fff;
+            letter-spacing: 0.5px;
+            background-color: rgba(51, 51, 51, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
             transition: transform 0.3s ease, background-color 0.3s ease;
         }
 
         .button:hover, .socials a:hover {
-            transform: scale(1.1);
-            background-color: rgba(85, 85, 85, 0.8); /* Efecto hover */
+            transform: scale(1.05);
+            background-color: rgba(85, 85, 85, 0.8);
         }
 
         .schedule-modal {
@@ -73,7 +79,7 @@
             padding: 20px;
             background-color: rgba(255, 255, 255, 0.9);
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
+            border-radius: 10px;
             z-index: 3;
             color: #333;
             font-weight: bold;
@@ -92,7 +98,7 @@
 
         .close-btn {
             margin-top: 15px;
-            background-color: rgba(51, 51, 51, 0.8); /* Botón traslúcido */
+            background-color: rgba(51, 51, 51, 0.8);
             color: #fff;
             cursor: pointer;
             transition: background-color 0.3s ease;
@@ -115,12 +121,12 @@
             font-size: 0.9em;
             z-index: 3;
             text-shadow: none;
-            box-shadow: 0 0 10px #fff, 0 0 20px #fff;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
         }
     </style>
 </head>
 <body>
-    <div class="gif-container" id="gifContainer"></div>
+    <div class="gif-container"></div>
     <div class="container">
         <h1>Detalles de Pago y Contacto</h1>
         <div class="details">
@@ -129,7 +135,7 @@
             <p><strong>Cuenta Corriente:</strong> 1276772503</p>
             <p><strong>RUT:</strong> 12006081-3</p>
             <p><strong>Correo:</strong> tiendavalpo07@gmail.com</p>
-            <p><strong>Nombre:</strong> Claudio Arias</p> <!-- Nombre agregado -->
+            <p><strong>Nombre:</strong> Claudio Arias</p>
             <button class="button" onclick="copyToClipboard()">Copiar datos de transferencia</button>
             <div id="copyNotification">Los datos han sido copiados</div>
         </div>
@@ -146,24 +152,10 @@
         <p>Sábado: 12:00 - 16:00 hrs</p>
         <button class="button close-btn" onclick="closeSchedule()">Volver</button>
     </div>
+
     <script>
-        const gifs = [
-            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWVhNzZpYXJ4cmE2YWhocmhqdHF5dmxhcG44enJlZ2ttbzc1c3JwZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0COGs72qnjeCJ4He/giphy.gif",
-            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWN5bXNhbWE0eWxieGYyajNoa3V1bzJkN21vZDN2M3FydW9jbWIyaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/At74Q5tdZAXxMwv8r8/giphy.gif",
-            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHlqMXMzMHA2NW5xaHZoMGg1MXZkb25sdDhvbnNxYnN2Mnp5Mm90MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Jnx5ztK49mHJe/giphy.gif",
-            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGx6dms4M2Exb3N1YmE0d2c0bjl5ams5cGJubXZhMXdrejRuNW9lNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fBjNVnqhEagMg/giphy.gif",
-            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHJ1cHlmeTNiMjhwNnNvaHdhaWJtZzZwM2NjOWFmYnU0d3k5NTV3YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/7q9TwhbiPhphcEQKLS/giphy.gif"
-        ];
-        let currentIndex = 0;
-
-        function changeGIF() {
-            const gifContainer = document.getElementById('gifContainer');
-            gifContainer.style.backgroundImage = `url(${gifs[currentIndex]})`;
-            currentIndex = (currentIndex + 1) % gifs.length;
-        }
-
         function copyToClipboard() {
-            const text = "Banco: Scotiabank\nCuenta Corriente: 1276772503\nRUT: 12006081-3\nCorreo: tiendavalpo07@gmail.com\nNombre de contacto: Claudio Arias"; // Nombre agregado aquí
+            const text = "Banco: Scotiabank\nCuenta Corriente: 1276772503\nRUT: 12006081-3\nCorreo: tiendavalpo07@gmail.com\nNombre de contacto: Claudio Arias";
             navigator.clipboard.writeText(text).then(() => {
                 const notification = document.getElementById('copyNotification');
                 notification.style.display = 'block';
@@ -180,17 +172,6 @@
             document.getElementById('scheduleModal').classList.add('hide');
             document.getElementById('scheduleModal').classList.remove('show');
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const gifContainer = document.getElementById('gifContainer');
-            gifContainer.addEventListener('click', (event) => {
-                if (!event.target.closest('.button')) {
-                    changeGIF();
-                }
-            });
-
-            setInterval(changeGIF, 10000); // Cambia el GIF cada 10 segundos
-        });
     </script>
 </body>
 </html>
