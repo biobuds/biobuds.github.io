@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles de Pago y Contacto</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             text-align: center;
@@ -15,58 +16,74 @@
             height: 100vh;
             background-color: #000;
             color: #fff;
-            transition: color 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
 
-        .gif-container {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            background-image: url('https://tenor.com/qYCis5RbuFU.gif');
-            background-size: cover;
+        .logo-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background-image: url('https://i.imgur.com/gDXPs0n.png');
+            background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            z-index: -1;
+            transform: translate(-50%, -50%) rotateY(0deg);
+            animation: spin 20s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+            perspective: 1000px;
+        }
+
+        @keyframes spin {
+            from {
+                transform: translate(-50%, -50%) rotateY(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotateY(360deg);
+            }
         }
 
         .container {
-            position: relative;
-            z-index: 2;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
             border-radius: 10px;
-            display: inline-block;
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 90%;
+            margin: auto;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            z-index: 1;
         }
 
         h1, h3, p {
-            color: inherit;
-            text-shadow: 0 0 5px #fff;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
             margin-bottom: 20px;
-            transition: color 0.5s ease;
+            font-weight: 600;
         }
 
         .button, .socials a {
             text-decoration: none;
             color: #fff;
-            padding: 12px 25px;
+            padding: 10px 20px;
             margin: 10px;
             display: inline-block;
             border-radius: 25px;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            background-color: rgba(51, 51, 51, 0.8);
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
             transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            font-size: 0.9em;
         }
 
         .button:hover, .socials a:hover {
-            transform: scale(1.08);
-            background-color: rgba(85, 85, 85, 0.8);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
         }
 
         .schedule-modal {
@@ -78,38 +95,30 @@
             width: 80%;
             max-width: 400px;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
             border-radius: 10px;
             z-index: 3;
-            color: #333;
+            color: #fff;
             font-weight: bold;
-            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .schedule-modal.show {
             display: block;
             opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .schedule-modal.hide {
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0.95);
-            pointer-events: none;
+            transition: opacity 0.3s ease;
         }
 
         .close-btn {
             margin-top: 15px;
-            background-color: rgba(51, 51, 51, 0.8);
+            background-color: rgba(255, 255, 255, 0.1);
             color: #fff;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: background-color 0.3s ease;
         }
 
         .close-btn:hover {
-            background-color: rgba(85, 85, 85, 0.8);
-            transform: scale(1.05);
+            background-color: rgba(255, 255, 255, 0.2);
         }
 
         #copyNotification {
@@ -129,8 +138,9 @@
         }
     </style>
 </head>
+
 <body>
-    <div class="gif-container"></div>
+    <div class="logo-container" id="logo"></div>
     <div class="container">
         <h1>Detalles de Pago y Contacto</h1>
         <div class="details">
@@ -158,6 +168,37 @@
     </div>
 
     <script>
+        const logo = document.getElementById('logo');
+        let isInteracting = false;
+
+        document.addEventListener('mousemove', (e) => {
+            if (isInteracting) {
+                const x = e.clientX / window.innerWidth - 0.5;
+                const y = e.clientY / window.innerHeight - 0.5;
+                logo.style.transform = `translate(-50%, -50%) rotateX(${y * 30}deg) rotateY(${x * 30}deg)`;
+            }
+        });
+
+        document.addEventListener('mousedown', () => {
+            isInteracting = true;
+            logo.style.animation = 'none';
+        });
+
+        document.addEventListener('mouseup', () => {
+            isInteracting = false;
+            logo.style.animation = 'spin 20s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55)';
+        });
+
+        logo.addEventListener('touchstart', () => {
+            isInteracting = true;
+            logo.style.animation = 'none';
+        });
+
+        logo.addEventListener('touchend', () => {
+            isInteracting = false;
+            logo.style.animation = 'spin 20s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55)';
+        });
+
         function copyToClipboard() {
             const text = "Banco: Scotiabank\nCuenta Corriente: 1976772503\nRUT: 12006081-3\nCorreo: tiendavalpo07@gmail.com\nNombre de contacto: Claudio Arias";
             navigator.clipboard.writeText(text).then(() => {
@@ -169,13 +210,12 @@
 
         function showSchedule() {
             document.getElementById('scheduleModal').classList.add('show');
-            document.getElementById('scheduleModal').classList.remove('hide');
         }
 
         function closeSchedule() {
-            document.getElementById('scheduleModal').classList.add('hide');
             document.getElementById('scheduleModal').classList.remove('show');
         }
     </script>
 </body>
+
 </html>
