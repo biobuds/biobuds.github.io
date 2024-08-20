@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Selecciona Tu Tienda</title>
     <style>
         body {
@@ -24,26 +24,39 @@
             margin-bottom: 20px;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
             font-size: 2.5rem;
+            z-index: 2;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+        }
+
+        .storeName {
+            font-size: 3rem;
+            margin-bottom: -10px;
+            z-index: 2;
+            opacity: 0;
+            animation: fadeIn 1.5s 0.5s forwards;
         }
 
         .button, .hub-button {
             text-decoration: none;
             color: #fff;
-            padding: 15px 30px;
+            padding: 12px 25px;
             margin: 10px;
             display: inline-block;
-            border-radius: 30px;
+            border-radius: 25px;
             font-weight: bold;
             text-transform: uppercase;
             background-color: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-            font-size: 1.1rem;
+            transition: all 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+            font-size: 1rem;
+            z-index: 3;
+            width: auto; /* Asegura que el área del botón sea completamente clicable */
         }
 
         .button:hover, .hub-button:hover {
-            transform: scale(1.15);
+            transform: scale(1.1);
             background-color: rgba(255, 255, 255, 0.3);
             box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
         }
@@ -52,7 +65,7 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            z-index: 3;
+            z-index: 100;
         }
 
         .logo-container {
@@ -65,9 +78,9 @@
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            transform: translate(-50%, -50%) rotateY(0deg);
-            opacity: 0;
-            transition: opacity 1s ease, transform 1s ease;
+            transform: translate(-50%, -50%) rotateY(0deg) rotateZ(0deg);
+            opacity: 0.15;
+            transition: opacity 1s ease, transform 0.3s ease-in-out;
             z-index: 1;
         }
 
@@ -75,34 +88,31 @@
             opacity: 0.2;
         }
 
-        .rotate-logo {
-            animation: spin 8s linear infinite;
+        .logo-oscillate {
+            animation: oscillate 5s ease-in-out infinite alternate;
         }
 
-        @keyframes spin {
-            from {
-                transform: translate(-50%, -50%) rotateY(0deg);
-            }
-            to {
-                transform: translate(-50%, -50%) rotateY(360deg);
-            }
+        @keyframes oscillate {
+            0% { transform: translate(-50%, -50%) rotateY(10deg) rotateZ(0deg); }
+            50% { transform: translate(-50%, -50%) rotateY(-10deg) rotateZ(3deg); }
+            100% { transform: translate(-50%, -50%) rotateY(10deg) rotateZ(-3deg); }
         }
 
         .logo-interactive {
             cursor: pointer;
-            z-index: 2;
+            z-index: 1;
         }
 
         .container {
             padding: 30px;
             border-radius: 15px;
-            max-width: 80%;
+            max-width: 90%;
             margin: auto;
             background-color: rgba(255, 255, 255, 0.1);
             box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-            z-index: 3;
             position: relative;
             text-align: left;
+            z-index: 2;
         }
 
         h3, p {
@@ -125,8 +135,9 @@
             background-color: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
+            transition: all 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
             font-size: 0.9em;
+            z-index: 2;
         }
 
         .socials a:hover, .store-button:hover {
@@ -151,15 +162,16 @@
             background-color: rgba(0, 0, 0, 0.8);
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
             border-radius: 10px;
-            z-index: 4;
+            z-index: 101;
             color: #fff;
             font-weight: bold;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .schedule-modal.show {
             display: block;
             opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
         }
 
         .close-btn {
@@ -167,11 +179,14 @@
             background-color: rgba(255, 255, 255, 0.1);
             color: #fff;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 5px;
         }
 
         .close-btn:hover {
             background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
         }
 
         #copyNotification {
@@ -185,23 +200,27 @@
             padding: 10px 20px;
             border-radius: 5px;
             font-size: 0.9em;
-            z-index: 4;
+            z-index: 101;
             text-shadow: none;
             box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body onload="initLogoAnimation()">
+    <div class="storeName">SeedHarta</div>
     <h1 id="storeSelectionTitle">Selecciona Tu Tienda</h1>
     <div id="storeSelection">
         <a href="#" class="button" onclick="showStore('vina')">Seed Harta Viña</a>
         <a href="#" class="button" onclick="showStore('valpo')">Seed Harta Valpo</a>
     </div>
 
-    <!-- Logo que aparece en el hub de selección de tiendas -->
-    <div id="logo" class="logo-container rotate-logo"></div>
+    <div id="logo" class="logo-container logo-oscillate"></div>
 
-    <!-- Contenido de la tienda Viña -->
     <div id="vinaStore" class="hidden">
         <div class="hub-button"><a href="#" class="hub-button" onclick="returnToHub()">Selección de tienda</a></div>
         <div class="logo-container logo-interactive"></div>
@@ -223,16 +242,15 @@
                 <a href="https://api.whatsapp.com/send?phone=56993198230&amp;text=Hola,%20quiero%20más%20información%20sobre%20sus%20productos." target="_blank" class="whatsapp external" rel="noopener">WhatsApp</a>
                 <button class="store-button" onclick="showSchedule('vina')">Ver Horarios</button>
             </div>
-        </div>
-        <div id="scheduleModalViña" class="schedule-modal">
-            <h3>Horarios de Atención:</h3>
-            <p>Lunes a Viernes: 10:30 - 19:00 hrs</p>
-            <p>Sábado: 12:00 - 16:00 hrs</p>
-            <button class="close-btn" onclick="closeSchedule('vina')">Volver</button>
+            <div id="scheduleModalViña" class="schedule-modal">
+                <h3>Horarios de Atención:</h3>
+                <p>Lunes a Viernes: 10:30 - 19:00 hrs</p>
+                <p>Sábado: 12:00 - 16:00 hrs</p>
+                <button class="close-btn" onclick="closeSchedule('vina')">Volver</button>
+            </div>
         </div>
     </div>
 
-    <!-- Contenido de la tienda Valpo -->
     <div id="valpoStore" class="hidden">
         <div class="hub-button"><a href="#" class="hub-button" onclick="returnToHub()">Selección de tienda</a></div>
         <div class="logo-container logo-interactive"></div>
@@ -242,7 +260,7 @@
                 <h3>Datos de Transferencia Bancaria:</h3>
                 <p><strong>Nombre:</strong> Claudio Arias</p>
                 <p><strong>Banco:</strong> Scotiabank</p>
-                <p><strong>Cuenta Corriente:</strong> 1276772503</p>
+                <p><strong>Cuenta Corriente:</strong> 1976772503</p>
                 <p><strong>RUT:</strong> 12.006.081-3</p>
                 <p><strong>Correo:</strong> seedhartagrow@gmail.com</p>
                 <button class="store-button" onclick="copyToClipboard('valpo')">Copiar datos de transferencia</button>
@@ -253,21 +271,23 @@
                 <a href="https://www.instagram.com/seedhartagrow/" target="_blank" class="instagram external" rel="noopener">Instagram</a>
                 <a href="https://api.whatsapp.com/send?phone=56993198230&amp;text=Hola,%20quiero%20más%20información%20sobre%20sus%20productos." target="_blank" class="whatsapp external" rel="noopener">WhatsApp</a>
                 <button class="store-button" onclick="showSchedule('valpo')">Ver Horarios</button>
-                <a href="https://www.google.com/maps?q=Pedro+Montt+2830+local+19+Rodoviario+Valparaiso" target="_blank" class="store-button">Google Maps</a>
+                <a href="https://www.google.com/maps/place/Seedharta+Growshop/@-33.0470596,-71.6420616,14z/data=!4m10!1m2!2m1!1sSeedharta+Growshop!3m6!1s0x9689e1c16b64872b:0x96d2bf256bf85bc3!8m2!3d-33.0470596!4d-71.6060127!15sChJTZWVkaGFydGEgR3Jvd3Nob3AiA4gBAZIBCGdhcmRlbmVy4AEA!16s%2Fg%2F11h64v92pm?entry=ttu" target="_blank" class="store-button">Google Maps</a>
             </div>
-        </div>
-        <div id="scheduleModalValpo" class="schedule-modal">
-            <h3>Horarios de Atención:</h3>
-            <p>Lunes a Viernes: 10:30 - 19:00 hrs</p>
-            <p>Sábado: 10:30 - 17:00 hrs</p>
-            <p>Domingo: 10:30 - 15:00 hrs</p>
-            <button class="close-btn" onclick="closeSchedule('valpo')">Volver</button>
+            <div id="scheduleModalValpo" class="schedule-modal">
+                <h3>Horarios de Atención:</h3>
+                <p>Lunes a Viernes: 10:30 - 19:00 hrs</p>
+                <p>Sábado: 10:30 - 17:00 hrs</p>
+                <p>Domingo: 10:30 - 15:00 hrs</p>
+                <button class="close-btn" onclick="closeSchedule('valpo')">Volver</button>
+            </div>
         </div>
     </div>
 
     <script>
         let rotationY = 0;
+        let rotationZ = 0;
         const sensitivity = 0.05;
+        const oscillationAmplitude = 10;
 
         function initLogoAnimation() {
             const logo = document.getElementById('logo');
@@ -276,6 +296,7 @@
                 logo.addEventListener('mousemove', rotateLogo);
                 logo.addEventListener('touchmove', rotateLogo);
             });
+            startOscillation();
         }
 
         function rotateLogo(event) {
@@ -283,13 +304,19 @@
             const rect = logo.getBoundingClientRect();
             const x = (event.clientX || event.touches[0].clientX) - rect.left - rect.width / 2;
             rotationY = x * sensitivity;
-            logo.style.transform = `translate(-50%, -50%) rotateY(${rotationY}deg)`;
+            rotationZ = (x / rect.width) * oscillationAmplitude;
+            logo.style.transform = `translate(-50%, -50%) rotateY(${rotationY}deg) rotateZ(${rotationZ}deg)`;
+        }
+
+        function startOscillation() {
+            const logo = document.getElementById('logo');
+            logo.classList.add('logo-oscillate');
         }
 
         function showStore(store) {
             document.getElementById('storeSelection').classList.add('hidden');
             document.getElementById('storeSelectionTitle').classList.add('hidden');
-            document.getElementById('logo').classList.remove('rotate-logo');
+            document.getElementById('logo').classList.remove('logo-oscillate');
 
             if (store === 'vina') {
                 document.getElementById('vinaStore').classList.remove('hidden');
@@ -298,7 +325,10 @@
             }
 
             setTimeout(() => {
-                document.querySelectorAll('.logo-interactive').forEach(logo => logo.classList.add('show-logo'));
+                document.querySelectorAll('.logo-interactive').forEach(logo => {
+                    logo.classList.add('show-logo');
+                    logo.classList.add('logo-oscillate');
+                });
             }, 500);
         }
 
@@ -307,7 +337,7 @@
             document.getElementById('valpoStore').classList.add('hidden');
             document.getElementById('storeSelection').classList.remove('hidden');
             document.getElementById('storeSelectionTitle').classList.remove('hidden');
-            document.getElementById('logo').classList.add('rotate-logo');
+            document.getElementById('logo').classList.add('logo-oscillate');
         }
 
         function copyToClipboard(store) {
@@ -315,7 +345,7 @@
             if (store === 'vina') {
                 text = "Banco: Scotiabank\nCuenta Corriente: 1976772503\nRUT: 12006081-3\nCorreo: tiendavalpo07@gmail.com\nNombre de contacto: Claudio Arias";
             } else if (store === 'valpo') {
-                text = "Banco: Scotiabank\nCuenta Corriente: 1276772503\nRUT: 12006081-3\nCorreo: seedhartagrow@gmail.com";
+                text = "Banco: Scotiabank\nCuenta Corriente: 1976772503\nRUT: 12006081-3\nCorreo: seedhartagrow@gmail.com";
             }
 
             navigator.clipboard.writeText(text).then(() => {
