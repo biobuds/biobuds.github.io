@@ -9,7 +9,7 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            height: 100vh;
+            min-height: 100vh;
             background-color: #000;
             color: #fff;
             display: flex;
@@ -23,14 +23,14 @@
         h1 {
             margin-bottom: 20px;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-            font-size: 2.5rem;
+            font-size: 2rem;
             z-index: 2;
             opacity: 0;
             animation: fadeIn 1.5s forwards;
         }
 
         .storeName {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: -10px;
             z-index: 2;
             opacity: 0;
@@ -49,14 +49,15 @@
             background-color: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+            transition: all 0.3s ease;
             font-size: 1rem;
+            width: 100%;
+            max-width: 300px;
             z-index: 3;
-            width: auto; /* Asegura que el área del botón sea completamente clicable */
         }
 
         .button:hover, .hub-button:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             background-color: rgba(255, 255, 255, 0.3);
             box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
         }
@@ -72,20 +73,20 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 350px;
-            height: 350px;
+            width: 250px;
+            height: 250px;
             background-image: url('https://i.imgur.com/gDXPs0n.png');
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
             transform: translate(-50%, -50%) rotateY(0deg) rotateZ(0deg);
-            opacity: 0.15;
+            opacity: 0.1;
             transition: opacity 1s ease, transform 0.3s ease-in-out;
             z-index: 1;
         }
 
         .show-logo {
-            opacity: 0.2;
+            opacity: 0.15;
         }
 
         .logo-oscillate {
@@ -104,7 +105,7 @@
         }
 
         .container {
-            padding: 30px;
+            padding: 20px;
             border-radius: 15px;
             max-width: 90%;
             margin: auto;
@@ -125,7 +126,7 @@
         .socials a, .store-button {
             text-decoration: none;
             color: #fff;
-            padding: 12px 25px;
+            padding: 10px 20px;
             margin: 10px;
             display: inline-block;
             border-radius: 25px;
@@ -135,13 +136,13 @@
             background-color: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-            font-size: 0.9em;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
             z-index: 2;
         }
 
         .socials a:hover, .store-button:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             background-color: rgba(255, 255, 255, 0.2);
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
         }
@@ -231,23 +232,23 @@
                 <p><strong>Nombre:</strong> Claudio Arias</p>
                 <p><strong>Banco:</strong> Scotiabank</p>
                 <p><strong>Cuenta Corriente:</strong> 1976772503</p>
-                <p><strong>RUT:</strong> 12.006.081-3</p>
-                <p><strong>Correo:</strong> tiendavalpo07@gmail.com</p>
-                <button class="store-button" onclick="copyToClipboard('vina')">Copiar datos de transferencia</button>
-                <div id="copyNotification">Los datos han sido copiados</div>
+                <p><strong>RUT:</strong> 12.345.678-9</p>
+                <p><strong>Email:</strong> claudio.arias@example.com</p>
+                <p><strong>Teléfono:</strong> +56 9 9319 8230</p>
+                <button class="socials copy-btn" onclick="copyToClipboard('1976772503')">Copiar Cuenta Corriente</button>
             </div>
             <div class="socials">
-                <h3>Síguenos y Contáctanos:</h3>
-                <a href="https://www.instagram.com/seedhartavinadelmar/" target="_blank" class="instagram external" rel="noopener">Instagram</a>
-                <a href="https://api.whatsapp.com/send?phone=56993198230&amp;text=Hola,%20quiero%20más%20información%20sobre%20sus%20productos." target="_blank" class="whatsapp external" rel="noopener">WhatsApp</a>
-                <button class="store-button" onclick="showSchedule('vina')">Ver Horarios</button>
+                <a href="https://www.instagram.com/seedharta" target="_blank">Instagram</a>
+                <a href="https://wa.me/56993198230" target="_blank">WhatsApp</a>
+                <a href="#" onclick="showSchedule()">Ver Horarios</a>
             </div>
-            <div id="scheduleModalViña" class="schedule-modal">
-                <h3>Horarios de Atención:</h3>
-                <p>Lunes a Viernes: 10:30 - 19:00 hrs</p>
-                <p>Sábado: 12:00 - 16:00 hrs</p>
-                <button class="close-btn" onclick="closeSchedule('vina')">Volver</button>
-            </div>
+        </div>
+        <div id="scheduleModal" class="schedule-modal">
+            <h2>Horarios de Atención</h2>
+            <p>Lunes a Viernes: 10:00 - 19:00</p>
+            <p>Sábado: 10:00 - 14:00</p>
+            <p>Domingo: Cerrado</p>
+            <button class="close-btn" onclick="closeSchedule()">Cerrar</button>
         </div>
     </div>
 
@@ -261,114 +262,67 @@
                 <p><strong>Nombre:</strong> Claudio Arias</p>
                 <p><strong>Banco:</strong> Scotiabank</p>
                 <p><strong>Cuenta Corriente:</strong> 1976772503</p>
-                <p><strong>RUT:</strong> 12.006.081-3</p>
-                <p><strong>Correo:</strong> seedhartagrow@gmail.com</p>
-                <button class="store-button" onclick="copyToClipboard('valpo')">Copiar datos de transferencia</button>
-                <div id="copyNotification">Los datos han sido copiados</div>
+                <p><strong>RUT:</strong> 12.345.678-9</p>
+                <p><strong>Email:</strong> claudio.arias@example.com</p>
+                <p><strong>Teléfono:</strong> +56 9 9319 8230</p>
+                <button class="socials copy-btn" onclick="copyToClipboard('1976772503')">Copiar Cuenta Corriente</button>
             </div>
             <div class="socials">
-                <h3>Síguenos y Contáctanos:</h3>
-                <a href="https://www.instagram.com/seedhartagrow/" target="_blank" class="instagram external" rel="noopener">Instagram</a>
-                <a href="https://api.whatsapp.com/send?phone=56993198230&amp;text=Hola,%20quiero%20más%20información%20sobre%20sus%20productos." target="_blank" class="whatsapp external" rel="noopener">WhatsApp</a>
-                <button class="store-button" onclick="showSchedule('valpo')">Ver Horarios</button>
-                <a href="https://www.google.com/maps/place/Seedharta+Growshop/@-33.0470596,-71.6420616,14z/data=!4m10!1m2!2m1!1sSeedharta+Growshop!3m6!1s0x9689e1c16b64872b:0x96d2bf256bf85bc3!8m2!3d-33.0470596!4d-71.6060127!15sChJTZWVkaGFydGEgR3Jvd3Nob3AiA4gBAZIBCGdhcmRlbmVy4AEA!16s%2Fg%2F11h64v92pm?entry=ttu" target="_blank" class="store-button">Google Maps</a>
+                <a href="https://www.instagram.com/seedharta" target="_blank">Instagram</a>
+                <a href="https://wa.me/56993198230" target="_blank">WhatsApp</a>
+                <a href="#" onclick="showSchedule()">Ver Horarios</a>
             </div>
-            <div id="scheduleModalValpo" class="schedule-modal">
-                <h3>Horarios de Atención:</h3>
-                <p>Lunes a Viernes: 10:30 - 19:00 hrs</p>
-                <p>Sábado: 10:30 - 17:00 hrs</p>
-                <p>Domingo: 10:30 - 15:00 hrs</p>
-                <button class="close-btn" onclick="closeSchedule('valpo')">Volver</button>
-            </div>
+        </div>
+        <div id="scheduleModal" class="schedule-modal">
+            <h2>Horarios de Atención</h2>
+            <p>Lunes a Viernes: 10:00 - 19:00</p>
+            <p>Sábado: 10:00 - 14:00</p>
+            <p>Domingo: Cerrado</p>
+            <button class="close-btn" onclick="closeSchedule()">Cerrar</button>
         </div>
     </div>
 
-    <script>
-        let rotationY = 0;
-        let rotationZ = 0;
-        const sensitivity = 0.05;
-        const oscillationAmplitude = 10;
+    <div id="copyNotification">¡Cuenta Copiada!</div>
 
+    <script>
         function initLogoAnimation() {
             const logo = document.getElementById('logo');
-            logo.classList.add('show-logo');
-            document.querySelectorAll('.logo-interactive').forEach(logo => {
-                logo.addEventListener('mousemove', rotateLogo);
-                logo.addEventListener('touchmove', rotateLogo);
-            });
-            startOscillation();
-        }
-
-        function rotateLogo(event) {
-            const logo = event.currentTarget;
-            const rect = logo.getBoundingClientRect();
-            const x = (event.clientX || event.touches[0].clientX) - rect.left - rect.width / 2;
-            rotationY = x * sensitivity;
-            rotationZ = (x / rect.width) * oscillationAmplitude;
-            logo.style.transform = `translate(-50%, -50%) rotateY(${rotationY}deg) rotateZ(${rotationZ}deg)`;
-        }
-
-        function startOscillation() {
-            const logo = document.getElementById('logo');
-            logo.classList.add('logo-oscillate');
+            setTimeout(() => {
+                logo.classList.add('show-logo');
+            }, 500);
         }
 
         function showStore(store) {
             document.getElementById('storeSelection').classList.add('hidden');
-            document.getElementById('storeSelectionTitle').classList.add('hidden');
-            document.getElementById('logo').classList.remove('logo-oscillate');
-
             if (store === 'vina') {
                 document.getElementById('vinaStore').classList.remove('hidden');
             } else if (store === 'valpo') {
                 document.getElementById('valpoStore').classList.remove('hidden');
             }
-
-            setTimeout(() => {
-                document.querySelectorAll('.logo-interactive').forEach(logo => {
-                    logo.classList.add('show-logo');
-                    logo.classList.add('logo-oscillate');
-                });
-            }, 500);
         }
 
         function returnToHub() {
+            document.getElementById('storeSelection').classList.remove('hidden');
             document.getElementById('vinaStore').classList.add('hidden');
             document.getElementById('valpoStore').classList.add('hidden');
-            document.getElementById('storeSelection').classList.remove('hidden');
-            document.getElementById('storeSelectionTitle').classList.remove('hidden');
-            document.getElementById('logo').classList.add('logo-oscillate');
         }
 
-        function copyToClipboard(store) {
-            let text = '';
-            if (store === 'vina') {
-                text = "Banco: Scotiabank\nCuenta Corriente: 1976772503\nRUT: 12006081-3\nCorreo: tiendavalpo07@gmail.com\nNombre de contacto: Claudio Arias";
-            } else if (store === 'valpo') {
-                text = "Banco: Scotiabank\nCuenta Corriente: 1976772503\nRUT: 12006081-3\nCorreo: seedhartagrow@gmail.com";
-            }
+        function showSchedule() {
+            document.getElementById('scheduleModal').classList.add('show');
+        }
 
-            navigator.clipboard.writeText(text).then(() => {
-                const notification = document.getElementById('copyNotification');
+        function closeSchedule() {
+            document.getElementById('scheduleModal').classList.remove('show');
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                var notification = document.getElementById('copyNotification');
                 notification.style.display = 'block';
-                setTimeout(() => notification.style.display = 'none', 2000);
+                setTimeout(function() {
+                    notification.style.display = 'none';
+                }, 2000);
             });
-        }
-
-        function showSchedule(store) {
-            if (store === 'vina') {
-                document.getElementById('scheduleModalViña').classList.add('show');
-            } else if (store === 'valpo') {
-                document.getElementById('scheduleModalValpo').classList.add('show');
-            }
-        }
-
-        function closeSchedule(store) {
-            if (store === 'vina') {
-                document.getElementById('scheduleModalViña').classList.remove('show');
-            } else if (store === 'valpo') {
-                document.getElementById('scheduleModalValpo').classList.remove('show');
-            }
         }
     </script>
 </body>
