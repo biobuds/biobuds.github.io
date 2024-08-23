@@ -234,21 +234,13 @@
                 <p><strong>Cuenta Corriente:</strong> 1976772503</p>
                 <p><strong>RUT:</strong> 12.345.678-9</p>
                 <p><strong>Email:</strong> tiendavalpo07@gmail.com</p>
-                <p><strong>Teléfono:</strong> +56 9 9319 8230</p>
-                <button class="socials copy-btn" onclick="copyToClipboard('1976772503')">Copiar Cuenta Corriente</button>
+                <button id="copyButton" onclick="copyToClipboard('Claudio Arias 12.345.678-9 Cuenta Corriente 1976772503 Banco Scotiabank tiendavalpo07@gmail.com')">Copiar datos de transferencia</button>
             </div>
             <div class="socials">
-                <a href="https://www.instagram.com/seedharta" target="_blank">Instagram</a>
-                <a href="https://wa.me/56993198230" target="_blank">WhatsApp</a>
-                <a href="#" onclick="showSchedule()">Ver Horarios</a>
+                <a href="https://wa.me/56912345678" target="_blank">WhatsApp</a>
+                <a href="https://facebook.com/tu-pagina" target="_blank">Facebook</a>
+                <a href="https://instagram.com/tu-pagina" target="_blank">Instagram</a>
             </div>
-        </div>
-        <div id="scheduleModal" class="schedule-modal">
-            <h2>Horarios de Atención</h2>
-            <p>Lunes a Viernes: 10:00 - 19:00</p>
-            <p>Sábado: 10:00 - 14:00</p>
-            <p>Domingo: Cerrado</p>
-            <button class="close-btn" onclick="closeSchedule()">Cerrar</button>
         </div>
     </div>
 
@@ -264,55 +256,30 @@
                 <p><strong>Cuenta Corriente:</strong> 1976772503</p>
                 <p><strong>RUT:</strong> 12.345.678-9</p>
                 <p><strong>Email:</strong> tiendavalpo07@gmail.com</p>
-                <p><strong>Teléfono:</strong> +56 9 9319 8230</p>
-                <button class="socials copy-btn" onclick="copyToClipboard('1976772503')">Copiar Cuenta Corriente</button>
+                <button id="copyButton" onclick="copyToClipboard('Claudio Arias 12.345.678-9 Cuenta Corriente 1976772503 Banco Scotiabank tiendavalpo07@gmail.com')">Copiar datos de transferencia</button>
             </div>
             <div class="socials">
-                <a href="https://www.instagram.com/seedharta" target="_blank">Instagram</a>
-                <a href="https://wa.me/56993198230" target="_blank">WhatsApp</a>
-                <a href="#" onclick="showSchedule()">Ver Horarios</a>
+                <a href="https://wa.me/56912345678" target="_blank">WhatsApp</a>
+                <a href="https://facebook.com/tu-pagina" target="_blank">Facebook</a>
+                <a href="https://instagram.com/tu-pagina" target="_blank">Instagram</a>
             </div>
-        </div>
-        <div id="scheduleModal" class="schedule-modal">
-            <h2>Horarios de Atención</h2>
-            <p>Lunes a Viernes: 10:00 - 19:00</p>
-            <p>Sábado: 10:00 - 14:00</p>
-            <p>Domingo: Cerrado</p>
-            <button class="close-btn" onclick="closeSchedule()">Cerrar</button>
         </div>
     </div>
 
-    <div id="copyNotification">¡Cuenta Copiada!</div>
+    <div id="copyNotification">Datos copiados al portapapeles.</div>
 
     <script>
-        function initLogoAnimation() {
-            const logo = document.getElementById('logo');
-            setTimeout(() => {
-                logo.classList.add('show-logo');
-            }, 500);
-        }
-
-        function showStore(store) {
-            document.getElementById('storeSelection').classList.add('hidden');
-            if (store === 'vina') {
-                document.getElementById('vinaStore').classList.remove('hidden');
-            } else if (store === 'valpo') {
-                document.getElementById('valpoStore').classList.remove('hidden');
-            }
+        function showStore(storeId) {
+            document.getElementById('storeSelection').style.display = 'none';
+            document.getElementById('vinaStore').classList.add('hidden');
+            document.getElementById('valpoStore').classList.add('hidden');
+            document.getElementById(storeId + 'Store').classList.remove('hidden');
         }
 
         function returnToHub() {
-            document.getElementById('storeSelection').classList.remove('hidden');
+            document.getElementById('storeSelection').style.display = 'block';
             document.getElementById('vinaStore').classList.add('hidden');
             document.getElementById('valpoStore').classList.add('hidden');
-        }
-
-        function showSchedule() {
-            document.getElementById('scheduleModal').classList.add('show');
-        }
-
-        function closeSchedule() {
-            document.getElementById('scheduleModal').classList.remove('show');
         }
 
         function copyToClipboard(text) {
@@ -322,7 +289,16 @@
                 setTimeout(function() {
                     notification.style.display = 'none';
                 }, 2000);
+            }, function(err) {
+                console.error('Error al copiar al portapapeles: ', err);
             });
+        }
+
+        function initLogoAnimation() {
+            var logo = document.getElementById('logo');
+            setTimeout(function() {
+                logo.classList.add('show-logo');
+            }, 500);
         }
     </script>
 </body>
